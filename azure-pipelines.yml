@@ -7,11 +7,24 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
+- script: echo "Starting Build Process"
+  displayName: 'Start Build'
+
+- script: dotnet restore
+  displayName: 'Restore NuGet Packages'
+
 - script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+  displayName: 'Build Project'
+
+- script: dotnet test --configuration $(buildConfiguration)
+  displayName: 'Run Tests'
+
+- script: echo "Build Process Completed"
+  displayName: 'End Build'
+
