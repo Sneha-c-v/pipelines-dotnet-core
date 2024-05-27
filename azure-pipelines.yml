@@ -28,3 +28,6 @@ steps:
 - script: echo "Build Process Completed"
   displayName: 'End Build'
 
+- task: WhiteSource@21
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)'
